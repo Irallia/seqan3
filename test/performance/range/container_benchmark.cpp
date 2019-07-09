@@ -24,7 +24,7 @@ using sdsl_int_vec = sdsl::int_vector<sizeof(t) * 8>;
 // ============================================================================
 
 template <template <typename> typename container_t, typename alphabet_t, bool reserve>
-static void push_back(benchmark::State& state)
+static void push_back(benchmark::State & state)
 {
     container_t<alphabet_t> c;
 
@@ -107,7 +107,7 @@ BENCHMARK_TEMPLATE(push_back, seqan3::bitcompressed_vector, alphabet_variant<cha
 // ============================================================================
 
 template <template <typename> typename container_t, typename alphabet_t, bool const_ = false>
-static void sequential_read(benchmark::State& state)
+static void sequential_read(benchmark::State & state)
 {
     [[maybe_unused]] container_t<alphabet_t> source;
     [[maybe_unused]] auto const & c_source = source;
@@ -200,7 +200,7 @@ BENCHMARK_TEMPLATE(sequential_read, seqan3::bitcompressed_vector, alphabet_varia
 // ============================================================================
 
 template <template <typename> typename container_t, typename alphabet_t>
-static void sequential_write(benchmark::State& state)
+static void sequential_write(benchmark::State & state)
 {
     [[maybe_unused]] std::vector<alphabet_t> source;
     [[maybe_unused]] container_t<alphabet_t> target;

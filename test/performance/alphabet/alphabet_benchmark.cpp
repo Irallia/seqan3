@@ -15,7 +15,7 @@
 using namespace seqan3;
 
 template <Alphabet alphabet_t>
-static void assign_char_(benchmark::State& state)
+static void assign_char_(benchmark::State & state)
 {
     using char_t = alphabet_char_t<alphabet_t>;
     for (auto _ : state)
@@ -33,7 +33,7 @@ static void assign_char_(benchmark::State& state)
 }
 
 template <Alphabet alphabet_t>
-static void to_char_(benchmark::State& state)
+static void to_char_(benchmark::State & state)
 {
     using char_t = alphabet_char_t<alphabet_t>;
     for (auto _ : state)
@@ -51,7 +51,7 @@ static void to_char_(benchmark::State& state)
 }
 
 template <Semialphabet alphabet_t>
-static void assign_rank_(benchmark::State& state)
+static void assign_rank_(benchmark::State & state)
 {
     using rank_t_ = alphabet_rank_t<alphabet_t>;
     using rank_t = std::conditional_t<std::is_same_v<rank_t_, bool>, uint8_t, rank_t_>;
@@ -70,7 +70,7 @@ static void assign_rank_(benchmark::State& state)
 }
 
 template <Semialphabet alphabet_t>
-static void to_rank_(benchmark::State& state)
+static void to_rank_(benchmark::State & state)
 {
     using rank_t_ = alphabet_rank_t<alphabet_t>;
     using rank_t = std::conditional_t<std::is_same_v<rank_t_, bool>, uint8_t, rank_t_>;
