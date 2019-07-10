@@ -20,7 +20,7 @@
 #include <seqan3/alphabet/adaptation/uint.hpp>
 #include <seqan3/core/add_enum_bitwise_operators.hpp>
 #include <seqan3/core/concept/tuple.hpp>
-#include <seqan3/core/metafunction/range.hpp>
+#include <seqan3/core/type_traits/range.hpp>
 #include <seqan3/io/stream/concept.hpp>
 #include <seqan3/range/shortcuts.hpp>
 #include <seqan3/std/ranges>
@@ -405,5 +405,3 @@ inline debug_stream_type & operator<<(debug_stream_type & s, rng_t && r)
 //!\}
 
 } // namespace seqan3
-
-#include <seqan3/io/stream/detail/debug_stream_alignment_matrix.hpp>
