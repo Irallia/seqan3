@@ -25,10 +25,11 @@ template <typename config_t>
 bool run_test(config_t const & cfg)
 {
     auto r = setup();
-    auto fn = detail::alignment_configurator::configure<decltype(r)>(cfg);
+    auto configuration_result = detail::alignment_configurator::configure<decltype(r)>(cfg);
+    auto algorithm = configuration_result.first;
     auto & [seq1, seq2] = *std::ranges::begin(r);
 
-    return fn(0u, seq1 | views::all, seq2 | views::all).score() == 0;
+    return algorithm(0u, seq1 | views::all, seq2 | views::all).score() == 0;
 }
 
 TEST(alignment_configurator, configure_edit)
