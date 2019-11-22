@@ -26,6 +26,7 @@
 #include <seqan3/alignment/pairwise/alignment_algorithm.hpp>
 #include <seqan3/alignment/pairwise/align_result_selector.hpp>
 #include <seqan3/alignment/pairwise/alignment_result.hpp>
+#include <seqan3/alignment/pairwise/detail/utility_traits.hpp>
 #include <seqan3/alignment/pairwise/edit_distance_algorithm.hpp>
 #include <seqan3/core/concept/tuple.hpp>
 #include <seqan3/core/type_traits/deferred_crtp_base.hpp>
@@ -262,14 +263,19 @@ public:
             using wrapped_first_t  = all_view<first_seq_t &>;
             using wrapped_second_t = all_view<second_seq_t &>;
 
+            // The alignment executor passes a chunk over an indexed sequence pair range to the alignment algorithm.
+            using indexed_sequence_pair_range_t = typename chunked_indexed_sequence_pairs<sequences_t>::type;
+            using indexed_sequence_pair_chunk_t = std::ranges::range_value_t<indexed_sequence_pair_range_t>;
+
             // Select the result type based on the sequences and the configuration.
             using result_t = alignment_result<typename align_result_selector<std::remove_reference_t<wrapped_first_t>,
                                                                              std::remove_reference_t<wrapped_second_t>,
                                                                              config_t
                                                                             >::type
                                              >;
+            using result_collection_t = std::vector<result_t>;  // Use a vector as return type.
             // Define the function wrapper type.
-            using function_wrapper_t = std::function<result_t(size_t const, wrapped_first_t, wrapped_second_t)>;
+            using function_wrapper_t = std::function<result_collection_t(indexed_sequence_pair_chunk_t)>;
 
             // ----------------------------------------------------------------------------
             // Test some basic preconditions
