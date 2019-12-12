@@ -255,3 +255,12 @@ div.solution {
     content: " Class";
     color: grey;
 }
+
+/* Linebreak in template parameters: */
+.memTemplParams {
+    white-space: normal;
+}
+
+.memItemLeft {
+    white-space: normal;
+}
