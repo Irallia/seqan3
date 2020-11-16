@@ -7,6 +7,7 @@
 
 /*!\file
  * \author Hannes Hauswedell <hannes.hauswedell AT fu-berlin.de>
+ * \author Lydia Buntrock <lydia.buntrock AT fu-berlin.de>
  * \brief Provides seqan3::type_list and auxiliary type traits.
  */
 
@@ -123,6 +124,25 @@ struct transfer_template_vargs_onto<source_template<source_varg_types...>, targe
  */
 template <typename source_type, template <auto ...> typename target_template>
 using transfer_template_vargs_onto_t = typename transfer_template_vargs_onto<source_type, target_template>::type;
+
+// ----------------------------------------------------------------------------
+// template_specialisation_of
+// ----------------------------------------------------------------------------
+
+/*!\addtogroup concept
+ * \{
+ */
+
+/*!\interface seqan3::template_specialisation_of <>
+ * \brief Provides concept `seqan3::template_specialisation_of<mytype, [...]>` for checking
+ *        the type specialisation of some type with a given template, for example `type_list`.
+ */
+//!\cond
+template <typename mytype, template <typename ...> typename type_template>
+SEQAN3_CONCEPT template_specialisation_of<mytype, type_template> = is_type_specialisation_of_v<mytype, type_template]>;
+
+//!\endcond
+//!\}
 
 // ----------------------------------------------------------------------------
 // is_type_specialisation_of_v
